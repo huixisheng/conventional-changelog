@@ -1,4 +1,4 @@
-*{{#if scope}} **{{scope}}:**
+** {{#if author}}@{{author}}{{~/if}}{{#if scope}} **{{scope}}:**
 {{~/if}} {{#if subject}}
   {{~subject}}
 {{~else}}
@@ -29,28 +29,32 @@
   {{~#each references}} {{#if @root.linkReferences~}}
     [
     {{~#if this.owner}}
-      {{~this.owner}}/
+      {{~this.owner}}/{{this.issue}}
     {{~/if}}
-    {{~this.repository}}#{{this.issue}}](
-    {{~#if @root.repository}}
-      {{~#if @root.host}}
-        {{~@root.host}}/
-      {{~/if}}
-      {{~#if this.repository}}
-        {{~#if this.owner}}
-          {{~this.owner}}/
-        {{~/if}}
-        {{~this.repository}}
-      {{~else}}
-        {{~#if @root.owner}}
-          {{~@root.owner}}/
-        {{~/if}}
-          {{~@root.repository}}
-        {{~/if}}
+    {{~this.repository}}{{this.prefix}}{{this.issue}}](
+    {{~#if this.issueUrl}}
+      {{~this.issueUrl}}{{this.issue}})
     {{~else}}
-      {{~@root.repoUrl}}
-    {{~/if}}/
-    {{~@root.issue}}/{{this.issue}})
+      {{~#if @root.repository}}
+        {{~#if @root.host}}
+          {{~@root.host}}/
+        {{~/if}}
+        {{~#if this.repository}}
+          {{~#if this.owner}}
+            {{~this.owner}}/
+          {{~/if}}
+          {{~this.repository}}
+        {{~else}}
+          {{~#if @root.owner}}
+            {{~@root.owner}}/
+          {{~/if}}
+            {{~@root.repository}}
+          {{~/if}}
+      {{~else}}
+        {{~@root.repoUrl}}
+      {{~/if}}/
+      {{~@root.issue}}/{{this.issue}}
+    {{~/if}})
   {{~else}}
     {{~#if this.owner}}
       {{~this.owner}}/

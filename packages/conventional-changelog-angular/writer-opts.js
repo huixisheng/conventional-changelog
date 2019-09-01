@@ -98,6 +98,14 @@ function getWriterOpts () {
         return false
       })
 
+      const join = require('path').join
+      const pkg = require(join(process.cwd(), 'package.json'));
+      commit.references.forEach(function (reference) {
+        if (reference.prefix !== `#` && pkg.bugs && pkg.bugs.url) {
+          reference.issueUrl = pkg.bugs.url
+        }
+      })
+
       return commit
     },
     groupBy: `type`,

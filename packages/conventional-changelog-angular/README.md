@@ -1,3 +1,34 @@
+> 根据自己的需求定制新功能
+
+新功能
+- changelog 支持输出 git author
+- 自定义 bugs.url 解析
+
+`conventional-changelog.config.js`
+```
+module.exports = {
+  parserOpts: {
+    issuePrefixes: [
+      'xxx-'
+    ]
+  },
+  gitRawCommitsOpts: {
+    // 输出 git author
+    // https://github.com/conventional-changelog-archived-repos/conventional-changelog-core/blob/master/lib/merge-config.js#L195
+    format: '%B%n-author-%n%an%n-hash-%n%H%n-gitTags-%n%d%n-committerDate-%n%ci',
+  },
+}
+```
+
+`package.json`
+```
+{
+  "bugs": {
+    "url": "http://jira.huixisheng.com/browse/jira-bug-"
+  },
+}
+```
+
 # [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 > [conventional-changelog](https://github.com/ajoslin/conventional-changelog) [angular](https://github.com/angular/angular) preset
